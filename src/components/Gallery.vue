@@ -5,7 +5,7 @@
   
   // The actual value is at loadedPagesCount.value
   const loadedPagesCount = ref(1);
-  const deletedImages = ref(new Set(['1']));
+  const deletedImages = ref(new Set());
 
   const firstImages = await getImages(loadedPagesCount.value);  
   const allImages = ref(firstImages);
@@ -31,9 +31,9 @@
     if (!isLoading.value && scrollTop + clientHeight >= scrollHeight - 600) {
         getMoreImages();
     }
-}, {
-    passive: true
-});
+  }, {
+      passive: true
+  });
 </script>
 
 <template>
@@ -41,7 +41,6 @@
     <transition name="fade" v-for="item in allImages" :key="item.id">
         <gallery-item :item="item" @click="removeImage(item.id)" v-if="!deletedImages.has(item.id)" />
     </transition>
-     <button @click="getMoreImages">MORE</button>
   </section>
 </template>
 
