@@ -1,47 +1,63 @@
 <script setup>
+import Gallery from './components/Gallery.vue';
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 </script>
 
+<!-- <template>
+  <main class="gallery">
+    <article class="gallery-item">
+      <img loading="lazy" src="https://picsum.photos/id/0/400/300" />
+    </article>
+  </main>
+</template> -->
+
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <Gallery />
+    
   </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+/* Gallery layout */
+:root {
+  --gallery-gap: 1.5rem;
+  --gallery-items-per-row: 2;
+  --gallery-item-border-radius: 1rem;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  gap: var(--gallery-gap);
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+@media (width >= 1024px) {
+  :root {
+    --gallery-gap: 1.6rem;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+  .gallery {
+    --gallery-items-per-row: 4;
   }
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+@media (750px < width < 1024px) {
+  :root {
+    --gallery-gap: 1.4rem;
+  }
+  .gallery {
+    --gallery-items-per-row: 3;
+  }
+}
+
+@media (width <= 750px) {
+  :root {
+    --gallery-gap: 1rem;
+  }
+  .gallery {
+    --gallery-items-per-row: 2;
   }
 }
 </style>
