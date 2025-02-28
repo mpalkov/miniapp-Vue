@@ -8,7 +8,7 @@ export default {
 
 <template>
   <article class="gallery-item">
-    <img loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>LALALA
+    <img loading="lazy" :item-id="`${item.id}`" :src="`https://picsum.photos/id/${item.id}/300/200`"/>LALALA
   </article>
 </template>
 
@@ -31,11 +31,11 @@ export default {
         (100% - (var(--gallery-gap) * (var(--gallery-items-per-row) - 1))) /
           var(--gallery-items-per-row)
       );
-
-    img {
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
-      border-radius: calc(4vw / var(--gallery-items-per-row));
+      
+      img {
+        border-radius: calc(4vw / var(--gallery-items-per-row));
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
     }
     /* transition: 0.6s position; */
   }
