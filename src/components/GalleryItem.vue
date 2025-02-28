@@ -8,7 +8,7 @@ export default {
 
 <template>
   <article class="gallery-item">
-    <img loading="lazy" :src="item.download_url"/>LALALA
+    <img loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>LALALA
   </article>
 </template>
 
