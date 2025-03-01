@@ -1,14 +1,34 @@
 <script>
+import { ref } from 'vue';
+import LoadingAnimation from './LoadingAnimation.vue';
+
 export default {
+  components: {
+    LoadingAnimation
+  },
   props: {
     item: Object
   },
-}
+  setup() {
+    const isImageLoaded = ref(false);
+
+    const onImageLoaded = () => {
+      isImageLoaded.value = true;
+    };
+
+    return {
+      isImageLoaded,
+      onImageLoaded
+    };
+  }
+};
 </script>
 
 <template>
   <article class="gallery-item" :item-id="`${item.id}`">
-    <img loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>
+    <LoadingAnimation v-if="!isImageLoaded" />
+    <img v-show="!isImageLoaded" @load="onImageLoaded" loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>
+    <img v-if="isImageLoaded" loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>
   </article>
 </template>
 
@@ -31,6 +51,10 @@ export default {
         (100% - (var(--gallery-gap) * (var(--gallery-items-per-row) - 1))) /
           var(--gallery-items-per-row)
       );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      aspect-ratio: 3 / 2;
       
       img {
         border-radius: calc(4vw / var(--gallery-items-per-row));
