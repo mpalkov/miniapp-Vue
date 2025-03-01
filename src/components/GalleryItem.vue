@@ -27,7 +27,7 @@ export default {
 <template>
   <article class="gallery-item" :item-id="`${item.id}`">
     <LoadingAnimation v-if="!isImageLoaded" />
-    <img v-show="!isImageLoaded" @load="onImageLoaded" loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>
+    <img v-if="!isImageLoaded" v-show="!isImageLoaded" @load="onImageLoaded" loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>
     <img v-if="isImageLoaded" loading="lazy" :src="`https://picsum.photos/id/${item.id}/300/200`"/>
   </article>
 </template>
@@ -55,6 +55,7 @@ export default {
       justify-content: center;
       align-items: center;
       aspect-ratio: 3 / 2;
+      cursor: pointer;
       
       img {
         border-radius: calc(4vw / var(--gallery-items-per-row));
