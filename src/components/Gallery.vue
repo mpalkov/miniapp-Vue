@@ -39,7 +39,7 @@
 <template>
   <section class="gallery">
     <transition name="fade" v-for="item in allImages" :key="item.id">
-        <gallery-item :item="item" @click="removeImage(item.id)" v-if="!deletedImages.has(item.id)" />
+        <GalleryItem :item="item" @click="removeImage(item.id)" v-if="!deletedImages.has(item.id)" />
     </transition>
   </section>
 </template>
