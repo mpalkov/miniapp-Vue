@@ -1,7 +1,7 @@
 <script setup>
   import GalleryItem from './GalleryItem.vue';
   import {ref, onMounted, onUnmounted} from 'vue';
-  import {getImages} from '../scripts/getImages.js'
+  import getImages from '@/scripts/getImages.js';
   
   // The actual value is at loadedPagesCount.value
   const loadedPagesCount = ref(1);
@@ -46,7 +46,8 @@
 
 <style>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.4s, transform 0.4s;
+  
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;

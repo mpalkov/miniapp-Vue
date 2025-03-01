@@ -1,7 +1,5 @@
 <script setup>
-import Gallery from './components/Gallery.vue';
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import GalleryComponent from './components/GalleryComponent.vue';
 </script>
 
 <!-- <template>
@@ -15,7 +13,7 @@ import TheWelcome from './components/TheWelcome.vue'
 <template>
   <main>
     <Suspense>
-      <Gallery />
+      <GalleryComponent />
     </Suspense>
     
   </main>
