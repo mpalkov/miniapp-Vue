@@ -1,6 +1,6 @@
 <script setup>
   import GalleryItem from './GalleryItem.vue';
-  import {ref, onMounted, onUnmounted} from 'vue';
+  import { ref } from 'vue';
   import getImagesData from '@/scripts/getImagesData.js';
   
   const loadedPagesCount = ref(1);
