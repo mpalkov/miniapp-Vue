@@ -36,7 +36,7 @@ const getGalleryItems = (wrapper) => wrapper.findAll('.gallery-item')
  * 
  * returns the found `galleryItems` for further testing if desired to make use of.
  * @param {VueWrapper} wrapper 
- * @param {number} pagesLoadedCount 
+ * @param {integer} pagesLoadedCount 
  * @returns {VueWrapper} galleryItems
  */
 const checkGalleryItemsCount = (wrapper, pagesLoadedCount) => {
@@ -45,6 +45,27 @@ const checkGalleryItemsCount = (wrapper, pagesLoadedCount) => {
   expect(items.length).toBe(expectedCount);
   return items;
 };
+
+/**
+ * Simulates and asserts correct removal of an item from the GalleryComponent after licking it
+ * 
+ * @param {VueWrapper} wrapper 
+ * @param {integer} pagesLoadedCount
+ */
+const testImageRemoval = async (wrapper, imageIndex) => {
+  const items = getGalleryItems(wrapper);
+  const imagesCountBefore = items.length;
+  const item = items[imageIndex];
+  const renderedGalleryComponent = wrapper.findComponent(GalleryComponent);
+
+  const removedId = item.attributes('item-id');
+  await item.trigger('click');
+  await new Promise((resolve) => setTimeout(resolve, TRANSITION_DURATION_MS + 200));
+  const itemsAfter = getGalleryItems(wrapper);
+  expect(itemsAfter.length).toBe(imagesCountBefore - 1);
+  expect(renderedGalleryComponent.vm.deletedImages.has(parseInt(removedId))).toBe(true);
+  expect(itemsAfter.filter((element) => element.attributes('item-id') === removedId).length).toBe(0);
+}
 
 describe('GalleryComponent.vue', () => {
   let wrapper;
@@ -87,27 +108,9 @@ describe('GalleryComponent.vue', () => {
     expect(getImagesModule.default).toHaveBeenCalledWith(2);
   });
 
-  // confirm that image id is added to the removedImages Set
-  // confirm, there is one image less rendered
-  // confirm, there is no image with the removed img id
-
-  const testImageRemoval = async (wrapper, imageIndex) => {
-    const items = getGalleryItems(wrapper);
-    const imagesCountBefore = items.length;
-    const item = items[imageIndex];
-    const renderedGalleryComponent = wrapper.findComponent(GalleryComponent);
-
-    const removedId = item.attributes('item-id');
-    await new Promise((resolve) => setTimeout(resolve, TRANSITION_DURATION_MS + 200));
-    const itemsAfter = getGalleryItems(wrapper);
-    expect(itemsAfter.length).toBe(imagesCountBefore - 1);
-    expect(renderedGalleryComponent.vm.deletedImages.has(parseInt(removedId))).toBe(true);
-    expect(itemsAfter.filter((element) => element.attributes('item-id') === removedId).length).toBe(0);
-  }
-
   test('First, last and inbetween images are removed after clicking on them', async () => {
-    await testImageRemoval(wrapper, 49);
+    await testImageRemoval(wrapper, IMAGES_FETCH_LIMIT - 1);
     await testImageRemoval(wrapper, 0);
-    // await testImageRemoval(wrapper, Math.trunc(IMAGES_FETCH_LIMIT / 2));
+    await testImageRemoval(wrapper, Math.floor(IMAGES_FETCH_LIMIT / 2));
   });
 });
