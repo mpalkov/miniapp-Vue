@@ -1,8 +1,8 @@
 import { flushPromises, mount } from '@vue/test-utils';
-import { describe, expect, test, vi, beforeEach, has } from 'vitest';
+import { describe, expect, test, vi, beforeEach } from 'vitest';
 import GalleryComponent from '@/components/GalleryComponent.vue';
 import * as getImagesModule from '@/scripts/getImagesData';
-import initConfig from '@/assets/appConfig';
+import initConfig from '@/appConfig';
 const { IMAGES_FETCH_LIMIT, TRANSITION_DURATION_MS } = initConfig;
 
 const createMockPageData = (pageNumber) => {

@@ -1,4 +1,4 @@
-import initConfig from "@/assets/appConfig";
+import initConfig from "@/appConfig";
 
 /** 
  * Fetches data from the images API_URL 

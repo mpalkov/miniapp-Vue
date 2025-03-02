@@ -1,13 +1,17 @@
 <script setup>
   import GalleryItem from './GalleryItem.vue';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import getImagesData from '@/scripts/getImagesData.js';
   
-  const loadedPagesCount = ref(1);
+  const loadedPagesCount = ref(0);
   const deletedImages = ref(new Set());
-  const firstImages = await getImagesData(loadedPagesCount.value);  
-  const allImages = ref(firstImages);
+  const allImages = ref([]);
   const isLoading = ref(false);
+
+  onMounted(() => {
+    getMoreImages();
+  });
+
   const getMoreImages = async () => {
     loadedPagesCount.value++;
     isLoading.value = true;
@@ -15,6 +19,7 @@
     isLoading.value = false;
     allImages.value.push(...newImages); 
   };
+
   const removeImage = (id) => deletedImages.value.add(id);
 
   window.addEventListener('scroll', () => {
