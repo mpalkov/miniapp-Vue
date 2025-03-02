@@ -8,8 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "lint": "eslint . --fix"
   },
   "dependencies": {
     "vue": "^3.5.13"
@@ -23,7 +22,6 @@
     "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
     "jsdom": "^26.0.0",
-    "prettier": "^3.5.1",
     "vite": "^6.1.0",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vitest": "^3.0.7"

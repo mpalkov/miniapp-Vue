@@ -2,20 +2,11 @@
 import GalleryComponent from './components/GalleryComponent.vue';
 </script>
 
-<!-- <template>
-  <main class="gallery">
-    <article class="gallery-item">
-      <img loading="lazy" src="https://picsum.photos/id/0/400/300" />
-    </article>
-  </main>
-</template> -->
-
 <template>
   <main>
     <Suspense>
       <GalleryComponent />
     </Suspense>
-    
   </main>
 </template>
 
@@ -30,7 +21,6 @@ import GalleryComponent from './components/GalleryComponent.vue';
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
   gap: var(--gallery-gap);
 }
 

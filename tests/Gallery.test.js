@@ -1,7 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, test, vi, beforeEach, has } from 'vitest';
 import GalleryComponent from '@/components/GalleryComponent.vue';
-import * as getImagesModule from '@/scripts/getImages';
+import * as getImagesModule from '@/scripts/getImagesData';
 import initConfig from '@/assets/appConfig';
 const { IMAGES_FETCH_LIMIT, TRANSITION_DURATION_MS } = initConfig;
 
@@ -11,7 +11,7 @@ const createMockPageData = (pageNumber) => {
     id: startId + i,
   }));
 };
-vi.mock('@/scripts/getImages.js', () => ({
+vi.mock('@/scripts/getImagesData.js', () => ({
   default: vi.fn(pageNumber => Promise.resolve(createMockPageData(pageNumber)))
 }));
 

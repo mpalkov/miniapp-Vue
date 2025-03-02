@@ -1,26 +1,21 @@
 <script setup>
   import GalleryItem from './GalleryItem.vue';
   import {ref, onMounted, onUnmounted} from 'vue';
-  import getImages from '@/scripts/getImages.js';
+  import getImagesData from '@/scripts/getImagesData.js';
   
-  // The actual value is at loadedPagesCount.value
   const loadedPagesCount = ref(1);
   const deletedImages = ref(new Set());
-
-  const firstImages = await getImages(loadedPagesCount.value);  
+  const firstImages = await getImagesData(loadedPagesCount.value);  
   const allImages = ref(firstImages);
   const isLoading = ref(false);
-  const getMoreImages = async() => {
+  const getMoreImages = async () => {
     loadedPagesCount.value++;
     isLoading.value = true;
-    const newImages = await getImages(loadedPagesCount.value);
+    const newImages = await getImagesData(loadedPagesCount.value);
     isLoading.value = false;
     allImages.value.push(...newImages); 
-  }
-
-  const removeImage = (id) => {
-    deletedImages.value.add(id);
-  }
+  };
+  const removeImage = (id) => deletedImages.value.add(id);
 
   window.addEventListener('scroll', () => {
     const {
@@ -28,7 +23,7 @@
         scrollHeight,
         clientHeight
     } = document.documentElement;
-    if (!isLoading.value && scrollTop + clientHeight >= scrollHeight - 600) {
+    if (!isLoading.value && (scrollTop + clientHeight >= scrollHeight - 600)) {
         getMoreImages();
     }
   }, {
@@ -47,7 +42,6 @@
 <style>
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.4s, transform 0.4s;
-  
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;

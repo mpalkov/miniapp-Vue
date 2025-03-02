@@ -33,18 +33,6 @@ export default {
 </template>
 
 <style>
-  /* 
-   * Width of each item = Wi
-   * Container width = Wc
-   * Gap between items = g
-   * Items per row in the gallery = n
-   * Total space coverd by gaps = G
-   * Available space for items per row = Wa
-   *
-   * G = g * (n - 1)
-   * Wa = Wc - G
-   * Wi = Wa / n
-   */
   .gallery-item {
     flex: 0 0
       calc(
